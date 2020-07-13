@@ -12,7 +12,8 @@ project_path = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 
 # host配置
 server_url = os.path.join(project_path, 'Config', 'server.ini')
-
+# mysql配置
+mysql_path = os.path.join(project_path, 'Config', 'mysql.ini')
 # excel路径
 excel_path = os.path.join(project_path, 'Case', 'sanjieke_auto.xlsx')
 

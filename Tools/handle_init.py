@@ -38,5 +38,5 @@ class HandleInit:
 handle_ini = HandleInit()
 
 if __name__ == '__main__':
-    print(handle_ini.get_value(node='no_token', key='header', file_name='header.ini'))
-    print(handle_ini.load_ini())
+    print(handle_ini.get_value(node='host', key='Mysql', file_name='mysql.ini'))
+    # print(handle_ini.load_ini())
