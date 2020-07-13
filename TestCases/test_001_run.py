@@ -13,6 +13,7 @@ from Tools.handle_excel import excel_data
 from Tools.handle_init import handle_ini
 from Tools.handle_replace import headle_re
 from Tools.handle_result import handle_result_json
+from Common.get_data import gd
 
 test_data = excel_data.get_excel_data()
 
@@ -38,7 +39,10 @@ class TestRunMain(unittest.TestCase):
                 res_value = excel_data.get_cell_value(rows_number, 13)
             data = test_data[7]
             if data != None:
-                data = eval(data)
+                if headle_re.find_data(data):
+                    data = eval(headle_re.str_data('${phone}', data, gd.get_phone()))
+                else:
+                    data = eval(data)
             is_header = test_data[9]
             if is_header.upper() == 'YES':
                 header = eval(handle_ini.get_value(key='header', node='no_token', file_name='header.ini'))

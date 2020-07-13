@@ -8,6 +8,7 @@
 import requests
 import json
 from Tools.handle_init import handle_ini
+from Common.get_data import gd
 
 
 class BaseRequest:
@@ -31,7 +32,8 @@ class BaseRequest:
         '''
         执行方法，传递method、url、data等参数
         '''
-        base_url = handle_ini.get_value(node='Pre')
+        base_url = handle_ini.get_value(node=gd.get_env())
+        # print(base_url)
         if 'http' not in url:
             url = base_url + url
         if method.upper() == 'GET':

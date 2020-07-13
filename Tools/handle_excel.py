@@ -23,7 +23,7 @@ class HandExcel:
         '''
         sheet_name = self.load_excel().sheetnames
         if index == None:
-            index = 0
+            index = 1
         data = self.load_excel()[sheet_name[index]]
         return data
 
