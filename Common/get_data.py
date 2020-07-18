@@ -31,7 +31,7 @@ class GetData:
     def get_password(self):
         res_data = excel_data.get_cell_value(5, 2, 0)
         return res_data
-
+    # 获取新密码
     def get_new_password(self):
         res_data = excel_data.get_cell_value(6, 2, 0)
         return res_data

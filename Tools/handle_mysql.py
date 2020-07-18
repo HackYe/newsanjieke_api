@@ -23,7 +23,9 @@ class HandleMysql:
     def fetch_one(self, sql):
         self.cursor.execute(sql)
         self.mysql.commit()
-        return self.cursor.fetchone()  # 返回一条数据，元组
+        mysql_res = self.cursor.fetchone()
+        for key, value in mysql_res.items():
+            return value  # 返回一条数据，元组
 
     def fetch_all(self, sql):
         self.cursor.execute(sql)
@@ -37,6 +39,9 @@ class HandleMysql:
 handle_mysql = HandleMysql()
 if __name__ == '__main__':
     res = handle_mysql.fetch_one(
-        "SELECT `code` FROM sjk_user.validation_code WHERE target = '+8613299203435' ORDER BY id DESC LIMIT 1")
-    print(eval((res)['code']))
+        "SELECT code FROM sjk_user.validation_code WHERE target = '+8613299203435' ORDER BY id DESC LIMIT 1")
+    # print(eval((res)['code']))
+    # print(type(eval((res)['code'])))
+    print(res)
+    print(type(res))
     handle_mysql.close()

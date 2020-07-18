@@ -12,12 +12,13 @@ from Base.base_request import request
 from Tools.handle_excel import excel_data
 from Tools.handle_init import handle_ini
 from Tools.handle_replace import headle_re
+from Tools.handle_mysql import handle_mysql
 from Tools.handle_result import handle_result_json
 from Common.get_data import gd
 
 test_data = excel_data.get_excel_data()
 
-# print(test_data)
+print(test_data)
 
 
 @ddt.ddt
@@ -37,10 +38,19 @@ class TestRunMain(unittest.TestCase):
             if condition != None:
                 rows_number = excel_data.get_rows_number(condition)
                 res_value = excel_data.get_cell_value(rows_number, 13)
+            mysql_query = test_data[15]
+            if mysql_query != None:
+                if headle_re.find_data(mysql_query):
+                    mysql_query = headle_re.str_data('${phone}', mysql_query, gd.get_phone())
+                else:
+                    pass
             data = test_data[7]
             if data != None:
                 if headle_re.find_data(data):
                     data = eval(headle_re.str_data('${phone}', data, gd.get_phone()))
+                    if headle_re.find_data(str(data)):
+                        data = eval(headle_re.str_data('${sql}', data,
+                                                       handle_mysql.fetch_one(mysql_query)))
                 else:
                     data = eval(data)
             is_header = test_data[9]
@@ -84,6 +94,7 @@ class TestRunMain(unittest.TestCase):
                         try:
                             self.assertEqual(excepect_result, status_code)
                             excel_data.excel_write_data(i, 14, 'PASS')
+                            return
                         except Exception as e:
                             excel_data.excel_write_data(i, 14, 'FAIL')
                             raise e
@@ -91,6 +102,7 @@ class TestRunMain(unittest.TestCase):
                         try:
                             self.assertEqual(excepect_result, message)
                             excel_data.excel_write_data(i, 14, 'PASS')
+                            return
                         except Exception as e:
                             excel_data.excel_write_data(i, 14, 'FAIL')
                             raise e
@@ -99,6 +111,7 @@ class TestRunMain(unittest.TestCase):
                             json_res = handle_result_json(res, eval(excepect_result))
                             self.assertTrue(json_res)
                             excel_data.excel_write_data(i, 14, 'PASS')
+                            return
                         except Exception as e:
                             excel_data.excel_write_data(i, 14, 'FAIL')
                             raise e
@@ -130,17 +143,14 @@ class TestRunMain(unittest.TestCase):
                 except Exception as e:
                     excel_data.excel_write_data(i, 14, 'FAIL')
                     raise e
-            '''
-            暂时不做处理
             elif excepect_method == 'sql':
                 try:
-                    self.assertEqual(excepect_result, msg)
+                    self.assertEqual(excepect_result, handle_mysql.fetch_one(mysql_query))
                     excel_data.excel_write_data(i, 14, 'PASS')
                 except Exception as e:
                     excel_data.excel_write_data(i, 14, 'FAIL')
                     raise e
             print('返回的数据是--------->', res)
-            '''
 
 
 if __name__ == '__main__':
