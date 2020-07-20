@@ -75,12 +75,14 @@ class HandExcel:
             columns_list.append(i.value)
         return columns_list
 
-    def excel_write_data(self, row, cols, value):
+    def excel_write_data(self, row, cols, value, sheet_name=None):
         '''
         写入数据
         '''
         wb = self.load_excel()
-        wr = wb.active
+        if sheet_name == None:
+            sheet_name = 'Common'
+        wr = wb[sheet_name]
         wr.cell(row, cols, value)
         wb.save(dir_config.excel_path)
 
@@ -109,4 +111,5 @@ class HandExcel:
 
 excel_data = HandExcel()
 if __name__ == '__main__':
-    print(HandExcel().get_excel_data())
+    # print(HandExcel().get_excel_data())
+    excel_data.excel_write_data(6, 1, 'hellotest')

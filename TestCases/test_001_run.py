@@ -17,12 +17,25 @@ from Tools.handle_result import handle_result_json
 from Common.get_data import gd
 
 test_data = excel_data.get_excel_data()
+sheet_name = 'initialization'
 
-print(test_data)
+# print(test_data)
 
 
 @ddt.ddt
 class TestRunMain(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        # 连接数据库
+        handle_mysql
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        # 每次执行用例后手机号+1
+        excel_data.excel_write_data(3, 2, gd.get_phone() + 1)
+        # 关闭数据库连接
+        handle_mysql.close()
 
     @ddt.data(*test_data)
     def test_run_case(self, test_data):
@@ -32,6 +45,7 @@ class TestRunMain(unittest.TestCase):
         i = excel_data.get_rows_number(case_id)
         is_run = test_data[2]
         if str(is_run).upper() == 'YES':
+            print('正在测试的用例是{}'.format(test_data[1]))
             method = test_data[6]
             url = test_data[5]
             condition = test_data[3]
@@ -42,17 +56,23 @@ class TestRunMain(unittest.TestCase):
             if mysql_query != None:
                 if headle_re.find_data(mysql_query):
                     mysql_query = headle_re.str_data('${phone}', mysql_query, gd.get_phone())
-                else:
-                    pass
             data = test_data[7]
             if data != None:
-                if headle_re.find_data(data):
-                    data = eval(headle_re.str_data('${phone}', data, gd.get_phone()))
-                    if headle_re.find_data(str(data)):
-                        data = eval(headle_re.str_data('${sql}', data,
-                                                       handle_mysql.fetch_one(mysql_query)))
-                else:
-                    data = eval(data)
+                try:
+                    if str(data).find('${phone}') != -1:
+                        data = eval(headle_re.str_data('${phone}', data, gd.get_phone()))
+                        if str(data).find('${sql}') != -1:
+                            data = eval(headle_re.str_data('${sql}', data, handle_mysql.fetch_one(mysql_query)))
+                    elif str(data).find('${sku_id}') != -1:
+                        data = eval(headle_re.str_data('${sku_id}', data, gd.get_sku_id()))
+                        # rely_key为前置条件替换通用str
+                    elif str(data).find('${rely_key}') != -1:
+                        data = eval(headle_re.str_data('${rely_key}', data, eval(excel_data.get_cell_value(i, 5))))
+                    else:
+                        data = eval(data)
+                except:
+                    pass
+
             is_header = test_data[9]
             if is_header.upper() == 'YES':
                 header = eval(handle_ini.get_value(key='header', node='no_token', file_name='header.ini'))
@@ -60,8 +80,8 @@ class TestRunMain(unittest.TestCase):
             elif is_header.upper() == 'TOKEN':
                 header = handle_ini.get_value(key='header', node='token', file_name='header.ini')
                 # 读取header
-                header = eval(headle_re.re_data(header, eval(excel_data.get_cell_value(i, 5))))
-                # 替换header里变量,excel读取到的都是str都需要eval
+                header = eval(headle_re.re_data(header, gd.get_token(3, 13, 1)))
+                # 替换header里变量
                 # print('带token的header是------>', header)
             else:
                 header = None
@@ -82,73 +102,73 @@ class TestRunMain(unittest.TestCase):
             res = request.run_main(method, url, data, header, file)
             try:
                 code = res['code']
-                print('code是------------>', code)
+                # print('code是------------>', code)
                 msg = res['msg']
-                print('msg是------------->', msg)
+                # print('msg是------------->', msg)
             except:
-                excel_data.excel_write_data(i, 13, str(res))
+                excel_data.excel_write_data(i, 13, str(res), sheet_name)
                 try:
                     message = res['message']
                     status_code = res['status_code']
                     if excepect_method == 'code':
                         try:
                             self.assertEqual(excepect_result, status_code)
-                            excel_data.excel_write_data(i, 14, 'PASS')
+                            excel_data.excel_write_data(i, 14, 'PASS', sheet_name)
                             return
                         except Exception as e:
-                            excel_data.excel_write_data(i, 14, 'FAIL')
+                            excel_data.excel_write_data(i, 14, 'FAIL', sheet_name)
                             raise e
                     elif excepect_method == 'msg':
                         try:
                             self.assertEqual(excepect_result, message)
-                            excel_data.excel_write_data(i, 14, 'PASS')
+                            excel_data.excel_write_data(i, 14, 'PASS', sheet_name)
                             return
                         except Exception as e:
-                            excel_data.excel_write_data(i, 14, 'FAIL')
+                            excel_data.excel_write_data(i, 14, 'FAIL', sheet_name)
                             raise e
                     elif excepect_method == 'json':
                         try:
                             json_res = handle_result_json(res, eval(excepect_result))
                             self.assertTrue(json_res)
-                            excel_data.excel_write_data(i, 14, 'PASS')
+                            excel_data.excel_write_data(i, 14, 'PASS', sheet_name)
                             return
                         except Exception as e:
-                            excel_data.excel_write_data(i, 14, 'FAIL')
+                            excel_data.excel_write_data(i, 14, 'FAIL', sheet_name)
                             raise e
                 except:
-                    excel_data.excel_write_data(i, 14, 'ERROR')
+                    excel_data.excel_write_data(i, 14, 'ERROR', sheet_name)
 
             result = str(res).encode('UTF-8')
             # 设置编码格式
-            excel_data.excel_write_data(i, 13, result)
+            excel_data.excel_write_data(i, 13, result, sheet_name)
             if excepect_method == 'code':
                 try:
                     self.assertEqual(excepect_result, code)
-                    excel_data.excel_write_data(i, 14, 'PASS')
+                    excel_data.excel_write_data(i, 14, 'PASS', sheet_name)
                 except Exception as e:
-                    excel_data.excel_write_data(i, 14, 'FAIL')
+                    excel_data.excel_write_data(i, 14, 'FAIL', sheet_name)
                     raise e
             elif excepect_method == 'msg':
                 try:
                     self.assertEqual(excepect_result, msg)
-                    excel_data.excel_write_data(i, 14, 'PASS')
+                    excel_data.excel_write_data(i, 14, 'PASS', sheet_name)
                 except Exception as e:
-                    excel_data.excel_write_data(i, 14, 'FAIL')
+                    excel_data.excel_write_data(i, 14, 'FAIL', sheet_name)
                     raise e
             elif excepect_method == 'json':
                 try:
                     json_res = handle_result_json(res, eval(excepect_result))
                     self.assertTrue(json_res)
-                    excel_data.excel_write_data(i, 14, 'PASS')
+                    excel_data.excel_write_data(i, 14, 'PASS', sheet_name)
                 except Exception as e:
-                    excel_data.excel_write_data(i, 14, 'FAIL')
+                    excel_data.excel_write_data(i, 14, 'FAIL', sheet_name)
                     raise e
             elif excepect_method == 'sql':
                 try:
                     self.assertEqual(excepect_result, handle_mysql.fetch_one(mysql_query))
-                    excel_data.excel_write_data(i, 14, 'PASS')
+                    excel_data.excel_write_data(i, 14, 'PASS', sheet_name)
                 except Exception as e:
-                    excel_data.excel_write_data(i, 14, 'FAIL')
+                    excel_data.excel_write_data(i, 14, 'FAIL', sheet_name)
                     raise e
             print('返回的数据是--------->', res)
 

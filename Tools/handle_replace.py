@@ -42,7 +42,7 @@ headle_re = HeadleRe()
 if __name__ == '__main__':
     # res = headle_re.re_data("{'app': 'sanjieke', 'platform': 'ios' , 'authorization':'${token_nologin}'}", '1112233')
     # print(res)
-    data = str({'username': '${phone}', 'password': 'Aa123123'})
+    data = str({'username': '${sku_id}', 'password': 'Aa123123'})
     # res = headle_re.str_data('${phone}', data, '15677004994')
     res = headle_re.find_data(raw_value=data)
     print(res)

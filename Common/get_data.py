@@ -9,8 +9,16 @@ from Tools.handle_excel import excel_data
 
 class GetData:
 
-    def get_token(self):
-        pass
+    # 获取token
+    def get_token(self, row, cols, index):
+        '''
+        :param row: 行
+        :param cols:列
+        :param index:sheet下标
+        :return:
+        '''
+        res_data = eval(excel_data.get_cell_value(row, cols, index))
+        return res_data['data']['token']
 
     # 获取环境变量
     def get_env(self):
@@ -31,10 +39,17 @@ class GetData:
     def get_password(self):
         res_data = excel_data.get_cell_value(5, 2, 0)
         return res_data
+
     # 获取新密码
     def get_new_password(self):
         res_data = excel_data.get_cell_value(6, 2, 0)
         return res_data
+
+    # 获取sku_id
+    def get_sku_id(self):
+        res_data = excel_data.get_cell_value(7, 2, 0)
+        return res_data
+
 
 gd = GetData()
 
