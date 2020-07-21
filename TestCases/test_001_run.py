@@ -19,6 +19,7 @@ from Common.get_data import gd
 test_data = excel_data.get_excel_data()
 sheet_name = 'initialization'
 
+
 # print(test_data)
 
 
@@ -28,7 +29,7 @@ class TestRunMain(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         # 连接数据库
-        handle_mysql
+        handle_mysql.__init__()
 
     @classmethod
     def tearDownClass(cls) -> None:
@@ -39,7 +40,7 @@ class TestRunMain(unittest.TestCase):
 
     @ddt.data(*test_data)
     def test_run_case(self, test_data):
-        global header, code, msg
+        global header, code, msg, result_list, res_data
         global res_value
         case_id = test_data[0]
         i = excel_data.get_rows_number(case_id)
@@ -49,9 +50,22 @@ class TestRunMain(unittest.TestCase):
             method = test_data[6]
             url = test_data[5]
             condition = test_data[3]
+            rely_value = test_data[4]
+            if rely_value != None:
+                rely_value = str(rely_value).split(',')
             if condition != None:
-                rows_number = excel_data.get_rows_number(condition)
-                res_value = excel_data.get_cell_value(rows_number, 13)
+                result_list = []
+                if str(condition).find(',') != -1:
+                    rely_key = str(condition).split(',')
+                    test_value = zip(rely_key, rely_value)
+                    for items in test_value:
+                        rows_number = excel_data.get_rows_number(items[0])
+                        res_value = excel_data.get_cell_value(rows_number, 13)
+                        res = eval(items[1])
+                        result_list.append(res)
+                else:
+                    rows_number = excel_data.get_rows_number(condition)
+                    res_value = excel_data.get_cell_value(rows_number, 13)
             mysql_query = test_data[15]
             if mysql_query != None:
                 if headle_re.find_data(mysql_query):
@@ -63,16 +77,17 @@ class TestRunMain(unittest.TestCase):
                         data = eval(headle_re.str_data('${phone}', data, gd.get_phone()))
                         if str(data).find('${sql}') != -1:
                             data = eval(headle_re.str_data('${sql}', data, handle_mysql.fetch_one(mysql_query)))
-                    elif str(data).find('${sku_id}') != -1:
-                        data = eval(headle_re.str_data('${sku_id}', data, gd.get_sku_id()))
-                        # rely_key为前置条件替换通用str
+                    # rely_key为单个前置条件替换通用str
                     elif str(data).find('${rely_key}') != -1:
                         data = eval(headle_re.str_data('${rely_key}', data, eval(excel_data.get_cell_value(i, 5))))
+                    # rely_keys为多个前置条件替换通用str
+                    elif str(data).find('${rely_keys}') != -1:
+                        res_data = headle_re.strs_data(data, result_list)
+                        data = eval(res_data)
                     else:
                         data = eval(data)
                 except:
                     pass
-
             is_header = test_data[9]
             if is_header.upper() == 'YES':
                 header = eval(handle_ini.get_value(key='header', node='no_token', file_name='header.ini'))
@@ -115,29 +130,29 @@ class TestRunMain(unittest.TestCase):
                             self.assertEqual(excepect_result, status_code)
                             excel_data.excel_write_data(i, 14, 'PASS', sheet_name)
                             return
-                        except Exception as e:
+                        except:
                             excel_data.excel_write_data(i, 14, 'FAIL', sheet_name)
-                            raise e
+                            return
                     elif excepect_method == 'msg':
                         try:
                             self.assertEqual(excepect_result, message)
                             excel_data.excel_write_data(i, 14, 'PASS', sheet_name)
                             return
-                        except Exception as e:
+                        except:
                             excel_data.excel_write_data(i, 14, 'FAIL', sheet_name)
-                            raise e
+                            return
                     elif excepect_method == 'json':
                         try:
                             json_res = handle_result_json(res, eval(excepect_result))
                             self.assertTrue(json_res)
                             excel_data.excel_write_data(i, 14, 'PASS', sheet_name)
                             return
-                        except Exception as e:
+                        except:
                             excel_data.excel_write_data(i, 14, 'FAIL', sheet_name)
-                            raise e
+                            return
                 except:
                     excel_data.excel_write_data(i, 14, 'ERROR', sheet_name)
-
+                    return
             result = str(res).encode('UTF-8')
             # 设置编码格式
             excel_data.excel_write_data(i, 13, result, sheet_name)

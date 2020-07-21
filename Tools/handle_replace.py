@@ -36,13 +36,55 @@ class HeadleRe:
         key = bool(re.search(data, raw_value))
         return key
 
+    # 发现符合正则要求的数量
+    def find_data_quantity(self, raw_value):
+        data = '\$\{.*?}'
+        pattern = re.compile(data)
+        res = pattern.findall(raw_value)
+        return len(res)
+
+    # 发现符合正则要求的字符串
+    def find_data_str(self, raw_value):
+        data = '\$\{.*?}'
+        pattern = re.compile(data)
+        res = pattern.findall(raw_value)
+        return res
+
+    # 批量替换
+    def strs_data(self, data, res_list):
+        for item in range(len(res_list)):
+            data = data.replace('${rely_keys}', str(res_list[item]), 1)
+        return data
+
 
 headle_re = HeadleRe()
 
 if __name__ == '__main__':
     # res = headle_re.re_data("{'app': 'sanjieke', 'platform': 'ios' , 'authorization':'${token_nologin}'}", '1112233')
     # print(res)
-    data = str({'username': '${sku_id}', 'password': 'Aa123123'})
+    # data = str({'username': '${sku_id}', 'password': 'Aa123123'})
     # res = headle_re.str_data('${phone}', data, '15677004994')
-    res = headle_re.find_data(raw_value=data)
-    print(res)
+    # res = headle_re.find_data(raw_value=data)
+    import re
+
+
+
+    result = ['654', 2]
+    data = str(
+        '{\'pay_channel\':\'wechat\',\'sku_id\':\'${rely_keys}\',\'coupons_code\':\'\',\'type\':\'${rely_keys}\',\'return_url\':\'sanjieke://sanjieke.cn/\'}')
+
+
+    data = headle_re.strs_data(data,result)
+    print(data)
+    # def strs_data(data, res_list):
+    #     for item in range(len(res_list)):
+    #         data = data.replace('${rely_keys}', str(res_list[item]), 1)
+    #     return data
+    # data = strs_data(data, result)
+    # print(data)
+
+
+
+    # for item in range(len(result)):
+    #     data = data.replace('${rely_keys}', str(result[item]), 1)
+    # print(data)
