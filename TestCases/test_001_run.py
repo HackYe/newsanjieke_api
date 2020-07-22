@@ -41,8 +41,8 @@ class TestRunMain(unittest.TestCase):
 
     @ddt.data(*test_data)
     def test_run_case(self, test_data):
-        global header, code, msg, result_list, res_data
-        global res_value
+        global header, code, msg, data_list, res_data, url_list
+        global data_value, url_value
         case_id = test_data[0]
         i = excel_data.get_rows_number(case_id)
         is_run = test_data[2]
@@ -52,27 +52,59 @@ class TestRunMain(unittest.TestCase):
             url = test_data[7]
             data_condition = test_data[3]
             rely_value = test_data[4]
+            url_condition = test_data[5]
+            url_rely_value = test_data[6]
             if rely_value != None:
                 rely_value = str(rely_value).split(',')
+            if url_rely_value != None:
+                url_rely_value = str(url_rely_value).split(',')
             # data的前置条件
             if data_condition != None:
-                result_list = []
+                data_list = []
                 if str(data_condition).find(',') != -1:
                     rely_key = str(data_condition).split(',')
                     test_value = zip(rely_key, rely_value)
                     for items in test_value:
                         rows_number = excel_data.get_rows_number(items[0])
-                        res_value = excel_data.get_cell_value(rows_number, 15)
+                        data_value = excel_data.get_cell_value(rows_number, 15)
                         res = eval(items[1])
-                        result_list.append(res)
+                        data_list.append(res)
                 else:
                     rows_number = excel_data.get_rows_number(data_condition)
-                    res_value = excel_data.get_cell_value(rows_number, 15)
+                    data_value = excel_data.get_cell_value(rows_number, 15)
+            if url_condition != None:
+                url_list = []
+                if str(url_condition).find(',') != -1:
+                    url_rely_key = str(url_condition).split(',')
+                    test_value = zip(url_rely_key, url_rely_value)
+                    for items in test_value:
+                        rows_number = excel_data.get_rows_number(items[0])
+                        url_value = excel_data.get_cell_value(rows_number, 15)
+                        res = eval(items[1])
+                        url_list.append(res)
+                else:
+                    rows_number = excel_data.get_rows_number(url_condition)
+                    url_value = excel_data.get_cell_value(rows_number, 15)
             mysql_query = test_data[17]
             if mysql_query != None:
                 if headle_re.find_data(mysql_query):
                     mysql_query = headle_re.str_data('${phone}', mysql_query, gd.get_phone())
             data = test_data[9]
+            #处理url
+            if url != None:
+                try:
+                    if str(url).find('${rely_key}') != -1:
+                        url = headle_re.str_data('${rely_key}', url, eval(excel_data.get_cell_value(i, 7)))
+                    # rely_keys为多个前置条件替换通用str
+                    elif str(url).find('${rely_keys}') != -1:
+                        res_data = headle_re.strs_data(url, url_list)
+                        url = res_data
+                    else:
+                        pass
+                except:
+                    pass
+
+            #处理data
             if data != None:
                 try:
                     if str(data).find('${phone}') != -1:
@@ -84,7 +116,7 @@ class TestRunMain(unittest.TestCase):
                         data = eval(headle_re.str_data('${rely_key}', data, eval(excel_data.get_cell_value(i, 5))))
                     # rely_keys为多个前置条件替换通用str
                     elif str(data).find('${rely_keys}') != -1:
-                        res_data = headle_re.strs_data(data, result_list)
+                        res_data = headle_re.strs_data(data, data_list)
                         data = eval(res_data)
                     else:
                         data = eval(data)
