@@ -45,11 +45,6 @@ class GetData:
         res_data = excel_data.get_cell_value(6, 2, 0)
         return res_data
 
-    # 获取sku_id
-    def get_sku_id(self):
-        res_data = excel_data.get_cell_value(7, 2, 0)
-        return res_data
-
 
 gd = GetData()
 
