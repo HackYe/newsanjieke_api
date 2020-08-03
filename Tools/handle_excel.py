@@ -47,11 +47,11 @@ class HandExcel:
         data = self.get_sheet_data(index).cell(row=row, column=cols).value
         return data
 
-    def get_rows(self):
+    def get_rows(self,index=None):
         '''
         获取最大行数
         '''
-        row = self.get_sheet_data().max_row
+        row = self.get_sheet_data(index).max_row
         return row
 
     def get_rows_value(self, row, index=None):
@@ -104,7 +104,7 @@ class HandExcel:
         :return: 获取excel里面所有的数据
         '''
         data_list = []
-        for i in range(self.get_rows() - 1):
+        for i in range(self.get_rows(index) - 1):
             data_list.append(self.get_rows_value(i + 2, index))
         return data_list
 

@@ -5,6 +5,7 @@
 @time: 2020/7/13 11:29
 """
 from Tools.handle_excel import excel_data
+import time
 
 
 class GetData:
@@ -45,8 +46,11 @@ class GetData:
         res_data = excel_data.get_cell_value(6, 2, 0)
         return res_data
 
+    def get_Timestamp(self):
+        res_data = int(round(time.time() * 1000000))
+        return res_data
 
 gd = GetData()
 
 if __name__ == '__main__':
-    print(gd.get_env())
+    print(gd.get_Timestamp())
