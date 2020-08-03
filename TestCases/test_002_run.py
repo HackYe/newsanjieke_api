@@ -200,45 +200,10 @@ class TestRunMain(unittest.TestCase):
                 # print('code是------------>', code)
                 msg = res['msg']
                 # print('msg是------------->', msg)
-            except:
+            except Exception as e:
                 excel_data.excel_write_data(i, 15, str(res), sheet_name)
-                try:
-                    message = res['message']
-                    status_code = res['status_code']
-                    if excepect_method == 'code':
-                        try:
-                            self.assertEqual(excepect_result, status_code)
-                            excel_data.excel_write_data(i, 16, 'PASS', sheet_name)
-                            return
-                        except Exception as e:
-                            raise e
-                        finally:
-                            excel_data.excel_write_data(i, 16, 'FAIL', sheet_name)
-                            return
-                    elif excepect_method == 'msg':
-                        try:
-                            self.assertEqual(excepect_result, message)
-                            excel_data.excel_write_data(i, 16, 'PASS', sheet_name)
-                            return
-                        except Exception as e:
-                            raise e
-                        finally:
-                            excel_data.excel_write_data(i, 16, 'FAIL', sheet_name)
-                            return
-                    elif excepect_method == 'json':
-                        try:
-                            json_res = handle_result_json(res, eval(excepect_result))
-                            self.assertTrue(json_res)
-                            excel_data.excel_write_data(i, 16, 'PASS', sheet_name)
-                            return
-                        except Exception as e:
-                            raise e
-                        finally:
-                            excel_data.excel_write_data(i, 16, 'FAIL', sheet_name)
-                            return
-                except:
-                    excel_data.excel_write_data(i, 16, 'ERROR', sheet_name)
-                    return
+                excel_data.excel_write_data(i, 16, 'ERROR', sheet_name)
+                raise e
             result = str(res).encode('UTF-8')
             # 设置编码格式
             excel_data.excel_write_data(i, 15, result, sheet_name)

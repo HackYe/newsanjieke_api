@@ -48,8 +48,8 @@ class TestRunMain(unittest.TestCase):
         global data_value, url_value
         case_id = test_data[0]
         # debug断点
-        if case_id == 'SJK_060':
-            print('这是要断点的数据')
+        # if case_id == 'SJK_060':
+        #     print('这是要断点的数据')
         i = excel_data.get_rows_number(case_id)
         is_run = test_data[2]
         if str(is_run).upper() == 'YES':
@@ -63,8 +63,10 @@ class TestRunMain(unittest.TestCase):
             rely_value = test_data[4]
             url_condition = test_data[5]
             url_rely_value = test_data[6]
+            # 前置条件进行分割，以,分割
             if rely_value != None:
                 rely_value = str(rely_value).split(',')
+            # 前置条件进行分割，以,分割
             if url_rely_value != None:
                 url_rely_value = str(url_rely_value).split(',')
             # data的前置条件
@@ -81,6 +83,7 @@ class TestRunMain(unittest.TestCase):
                 else:
                     rows_number = excel_data.get_rows_number(data_condition)
                     data_value = excel_data.get_cell_value(rows_number, 15)
+            # 前置条件进行分割，以,分割
             if url_condition != None:
                 url_list = []
                 if str(url_condition).find(',') != -1:
@@ -110,11 +113,8 @@ class TestRunMain(unittest.TestCase):
                     elif str(url).find('${rely_keys}') != -1:
                         res_data = headle_re.strs_data(url, url_list)
                         url = res_data
-                    else:
-                        pass
                 except:
                     pass
-
             # 处理data
             if data != None:
                 try:
@@ -194,46 +194,10 @@ class TestRunMain(unittest.TestCase):
                 # print('code是------------>', code)
                 msg = res['msg']
                 # print('msg是------------->', msg)
-            except:
+            except Exception as e:
                 excel_data.excel_write_data(i, 15, str(res), sheet_name)
-                try:
-                    message = res['message']
-                    status_code = res['status_code']
-                    if excepect_method == 'code':
-                        try:
-                            self.assertEqual(excepect_result, status_code)
-                            excel_data.excel_write_data(i, 16, 'PASS', sheet_name)
-                            return
-                        except Exception as e:
-                            print(e)
-                            raise e
-                        finally:
-                            excel_data.excel_write_data(i, 16, 'FAIL', sheet_name)
-                            return
-                    elif excepect_method == 'msg':
-                        try:
-                            self.assertEqual(excepect_result, message)
-                            excel_data.excel_write_data(i, 16, 'PASS', sheet_name)
-                            return
-                        except Exception as e:
-                            raise e
-                        finally:
-                            excel_data.excel_write_data(i, 16, 'FAIL', sheet_name)
-                            return
-                    elif excepect_method == 'json':
-                        try:
-                            json_res = handle_result_json(res, eval(excepect_result))
-                            self.assertTrue(json_res)
-                            excel_data.excel_write_data(i, 16, 'PASS', sheet_name)
-                            return
-                        except Exception as e:
-                            raise e
-                        finally:
-                            excel_data.excel_write_data(i, 16, 'FAIL', sheet_name)
-                            return
-                except:
-                    excel_data.excel_write_data(i, 16, 'ERROR', sheet_name)
-                    return
+                excel_data.excel_write_data(i, 16, 'ERROR', sheet_name)
+                raise e
             result = str(res).encode('UTF-8')
             # 设置编码格式
             excel_data.excel_write_data(i, 15, result, sheet_name)
