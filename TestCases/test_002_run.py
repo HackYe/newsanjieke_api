@@ -152,7 +152,7 @@ class TestRunMain(unittest.TestCase):
                                                        eval(excel_data.get_cell_value(i, 5, sheet_number))))
                     # transaction_id随机数生成（固定sjk+时间戳）
                     elif str(data).find('${transaction_id}') != -1:
-                        data = eval(headle_re.str_data('${transaction_id}', data, 'SJK' + str(gd.get_Timestamp())))
+                        data = headle_re.str_data('${transaction_id}', data, 'SJK' + str(gd.get_Timestamp()))
                         if str(data).find('${rely_keys}') != -1:
                             res_data = headle_re.strs_data(data, data_list)
                             data = eval(res_data)
