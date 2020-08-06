@@ -19,9 +19,11 @@ from Common.get_data import gd
 import time
 
 # sheet下标
-sheet_number = 2
+sheet_number = 3
 # sheet名称
-sheet_name = 'scene_1'
+sheet_name = 'scene_2'
+# 获取token的行号
+token_row = 5
 # 获取excel
 test_data = excel_data.get_excel_data(sheet_number)
 
@@ -36,13 +38,13 @@ class TestRunMain(unittest.TestCase):
     def setUpClass(cls) -> None:
         # 连接数据库
         handle_mysql.__init__()
+        # 每次执行用例前手机号+1
+        excel_data.excel_write_data(3, 2, gd.get_phone() + 1)
+        # 每次执行用例前修改手机号+1
+        excel_data.excel_write_data(4, 2, gd.get_new_phone() + 1)
 
     @classmethod
     def tearDownClass(cls) -> None:
-        # 每次执行用例后手机号+1
-        excel_data.excel_write_data(3, 2, gd.get_phone() + 1)
-        # 每次执行用例后修改手机号+1
-        excel_data.excel_write_data(4, 2, gd.get_new_phone() + 1)
         # 关闭数据库连接
         handle_mysql.close()
 
@@ -51,6 +53,8 @@ class TestRunMain(unittest.TestCase):
         global header, code, msg, data_list, res_data, url_list
         global data_value, url_value
         case_id = test_data[0]
+        if case_id == 'SJK_013':
+            print('这是断点的位置')
         i = excel_data.get_rows_number(case_id)
         sleep = test_data[18]
         if sleep != None:
@@ -175,7 +179,7 @@ class TestRunMain(unittest.TestCase):
             elif is_header.upper() == 'TOKEN':
                 header = handle_ini.get_value(key='header', node='token', file_name='header.ini')
                 # 读取header 新的sheet这块需要更改成获取token的坐标
-                header = eval(headle_re.re_data(header, gd.get_token(5, 15, 2)))
+                header = eval(headle_re.re_data(header, gd.get_token(token_row, 15, sheet_number)))
                 # 替换header里变量
                 # print('带token的header是------>', header)
             else:
@@ -201,6 +205,7 @@ class TestRunMain(unittest.TestCase):
                 msg = res['msg']
                 # print('msg是------------->', msg)
             except Exception as e:
+                print('返回的错误结果是:', res)
                 excel_data.excel_write_data(i, 15, str(res), sheet_name)
                 excel_data.excel_write_data(i, 16, 'ERROR', sheet_name)
                 raise e
@@ -213,6 +218,7 @@ class TestRunMain(unittest.TestCase):
                     excel_data.excel_write_data(i, 16, 'PASS', sheet_name)
                 except Exception as e:
                     excel_data.excel_write_data(i, 16, 'FAIL', sheet_name)
+                    print('返回的错误结果是:', res)
                     raise e
             elif excepect_method == 'msg':
                 try:
@@ -220,6 +226,7 @@ class TestRunMain(unittest.TestCase):
                     excel_data.excel_write_data(i, 16, 'PASS', sheet_name)
                 except Exception as e:
                     excel_data.excel_write_data(i, 16, 'FAIL', sheet_name)
+                    print('返回的错误结果是:', res)
                     raise e
             elif excepect_method == 'json':
                 try:
@@ -228,6 +235,7 @@ class TestRunMain(unittest.TestCase):
                     excel_data.excel_write_data(i, 16, 'PASS', sheet_name)
                 except Exception as e:
                     excel_data.excel_write_data(i, 16, 'FAIL', sheet_name)
+                    print('返回的错误结果是:', res)
                     raise e
             elif excepect_method == 'sql':
                 try:
@@ -235,6 +243,7 @@ class TestRunMain(unittest.TestCase):
                     excel_data.excel_write_data(i, 16, 'PASS', sheet_name)
                 except Exception as e:
                     excel_data.excel_write_data(i, 16, 'FAIL', sheet_name)
+                    print('返回的错误结果是:', res)
                     raise e
             print('返回的数据是--------->', res)
 

@@ -2,8 +2,9 @@
 
 """
 @Author: YuanYe
-@time: 2020/7/9 17:07
+@time: 2020/7/29 14:22
 """
+
 import unittest
 import ddt
 import HTMLTestRunnerNew
@@ -17,9 +18,14 @@ from Tools.handle_result import handle_result_json
 from Common.get_data import gd
 import time
 
-test_data = excel_data.get_excel_data()
-# sheet名称
-sheet_name = 'initialization'
+# sheet下标(从0开始)
+sheet_number = 4
+# sheet名称(sheet对应的名字)
+sheet_name = 'scene_3'
+# 获取token的行号(从1开始)
+token_row = 4
+# 获取excel
+test_data = excel_data.get_excel_data(sheet_number)
 
 
 # print(test_data)
@@ -47,26 +53,21 @@ class TestRunMain(unittest.TestCase):
         global header, code, msg, data_list, res_data, url_list
         global data_value, url_value
         case_id = test_data[0]
-        # debug断点
-        # if case_id == 'SJK_060':
-        #     print('这是要断点的数据')
         i = excel_data.get_rows_number(case_id)
+        sleep = test_data[18]
+        if sleep != None:
+            time.sleep(sleep)
         is_run = test_data[2]
         if str(is_run).upper() == 'YES':
             print('正在测试的用例是{}'.format(test_data[1]))
-            sleep = test_data[18]
-            if sleep != None:
-                time.sleep(sleep)
             method = test_data[8]
             url = test_data[7]
             data_condition = test_data[3]
             rely_value = test_data[4]
             url_condition = test_data[5]
             url_rely_value = test_data[6]
-            # 前置条件进行分割，以,分割
             if rely_value != None:
                 rely_value = str(rely_value).split(',')
-            # 前置条件进行分割，以,分割
             if url_rely_value != None:
                 url_rely_value = str(url_rely_value).split(',')
             # data的前置条件
@@ -77,13 +78,12 @@ class TestRunMain(unittest.TestCase):
                     test_value = zip(rely_key, rely_value)
                     for items in test_value:
                         rows_number = excel_data.get_rows_number(items[0])
-                        data_value = excel_data.get_cell_value(rows_number, 15)
+                        data_value = excel_data.get_cell_value(rows_number, 15, sheet_number)
                         res = eval(items[1])
                         data_list.append(res)
                 else:
                     rows_number = excel_data.get_rows_number(data_condition)
-                    data_value = excel_data.get_cell_value(rows_number, 15)
-            # 前置条件进行分割，以,分割
+                    data_value = excel_data.get_cell_value(rows_number, 15, sheet_number)
             if url_condition != None:
                 url_list = []
                 if str(url_condition).find(',') != -1:
@@ -91,12 +91,12 @@ class TestRunMain(unittest.TestCase):
                     test_value = zip(url_rely_key, url_rely_value)
                     for items in test_value:
                         rows_number = excel_data.get_rows_number(items[0])
-                        url_value = excel_data.get_cell_value(rows_number, 15)
+                        url_value = excel_data.get_cell_value(rows_number, 15, sheet_number)
                         res = eval(items[1])
                         url_list.append(res)
                 else:
                     rows_number = excel_data.get_rows_number(url_condition)
-                    url_value = excel_data.get_cell_value(rows_number, 15)
+                    url_value = excel_data.get_cell_value(rows_number, 15, sheet_number)
             mysql_query = test_data[17]
             if mysql_query != None:
                 if str(mysql_query).find('${phone}') != -1:
@@ -108,13 +108,17 @@ class TestRunMain(unittest.TestCase):
             if url != None:
                 try:
                     if str(url).find('${rely_key}') != -1:
-                        url = headle_re.str_data('${rely_key}', url, eval(excel_data.get_cell_value(i, 7)))
+                        url = headle_re.str_data('${rely_key}', url,
+                                                 eval(excel_data.get_cell_value(i, 7, sheet_number)))
                     # rely_keys为多个前置条件替换通用str
                     elif str(url).find('${rely_keys}') != -1:
                         res_data = headle_re.strs_data(url, url_list)
                         url = res_data
+                    else:
+                        pass
                 except:
                     pass
+
             # 处理data
             if data != None:
                 try:
@@ -128,7 +132,8 @@ class TestRunMain(unittest.TestCase):
                         data = eval(headle_re.str_data('${pwd}', data, gd.get_password()))
                         if str(data).find('${rely_key}') != -1:
                             data = eval(
-                                headle_re.str_data('${rely_key}', data, eval(excel_data.get_cell_value(i, 5))))
+                                headle_re.str_data('${rely_key}', data,
+                                                   eval(excel_data.get_cell_value(i, 5, sheet_number))))
                     # 处理修改密码逻辑
                     elif str(data).find('${newpassword}') != -1:
                         data = eval(headle_re.str_data('${newpassword}', data, gd.get_new_password()))
@@ -136,7 +141,8 @@ class TestRunMain(unittest.TestCase):
                             data = eval(headle_re.str_data('${repeat_password}', data, gd.get_password()))
                             if str(data).find('${rely_key}') != -1:
                                 data = eval(
-                                    headle_re.str_data('${rely_key}', data, eval(excel_data.get_cell_value(i, 5))))
+                                    headle_re.str_data('${rely_key}', data,
+                                                       eval(excel_data.get_cell_value(i, 5, sheet_number))))
                     # 处理修改手机号逻辑
                     elif str(data).find('${new_phone}') != -1:
                         data = eval(headle_re.str_data('${new_phone}', data, gd.get_new_phone()))
@@ -144,7 +150,8 @@ class TestRunMain(unittest.TestCase):
                             data = eval(headle_re.str_data('${sql}', data, handle_mysql.fetch_one(mysql_query)))
                             if str(data).find('${rely_key}') != -1:
                                 data = eval(
-                                    headle_re.str_data('${rely_key}', data, eval(excel_data.get_cell_value(i, 5))))
+                                    headle_re.str_data('${rely_key}', data,
+                                                       eval(excel_data.get_cell_value(i, 5, sheet_number))))
                     # transaction_id随机数生成（固定sjk+时间戳）
                     elif str(data).find('${transaction_id}') != -1:
                         data = headle_re.str_data('${transaction_id}', data, 'SJK' + str(gd.get_Timestamp()))
@@ -153,7 +160,8 @@ class TestRunMain(unittest.TestCase):
                             data = eval(res_data)
                     # rely_key为单个前置条件替换通用str
                     elif str(data).find('${rely_key}') != -1:
-                        data = eval(headle_re.str_data('${rely_key}', data, eval(excel_data.get_cell_value(i, 5))))
+                        data = eval(headle_re.str_data('${rely_key}', data,
+                                                       eval(excel_data.get_cell_value(i, 5, sheet_number))))
                     # rely_keys为多个前置条件替换通用str
                     elif str(data).find('${rely_keys}') != -1:
                         res_data = headle_re.strs_data(data, data_list)
@@ -168,8 +176,8 @@ class TestRunMain(unittest.TestCase):
                 # print('不带token的header是------>', header)
             elif is_header.upper() == 'TOKEN':
                 header = handle_ini.get_value(key='header', node='token', file_name='header.ini')
-                # 读取header
-                header = eval(headle_re.re_data(header, gd.get_token(3, 15, 1)))
+                # 读取header 新的sheet这块需要更改成获取token的坐标
+                header = eval(headle_re.re_data(header, gd.get_token(token_row, 15, sheet_number)))
                 # 替换header里变量
                 # print('带token的header是------>', header)
             else:
