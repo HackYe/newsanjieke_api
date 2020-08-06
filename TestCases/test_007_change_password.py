@@ -19,9 +19,9 @@ from Common.get_data import gd
 import time
 
 # sheet下标(从0开始)
-sheet_number = 6
+sheet_number = 7
 # sheet名称(sheet对应的名字)
-sheet_name = 'scene_5'
+sheet_name = 'scene_6'
 # 获取token的行号(从1开始)
 token_row = 4
 # 获取excel
@@ -122,13 +122,6 @@ class TestRunMain(unittest.TestCase):
             # 处理data
             if data != None:
                 try:
-                    # 处理验证码和更换手机号token逻辑
-                    if str(data).find('${sql}') != -1:
-                        data = headle_re.str_data('${sql}', data, handle_mysql.fetch_one(mysql_query))
-                        if str(data).find('${rely_key}') != -1:
-                            data = eval(
-                                headle_re.str_data('${rely_key}', data,
-                                                   eval(excel_data.get_cell_value(i, 5, sheet_number))))
                     # 处理替换手机逻辑
                     if str(data).find('${phone}') != -1:
                         data = eval(headle_re.str_data('${phone}', data, gd.get_phone()))
@@ -159,13 +152,6 @@ class TestRunMain(unittest.TestCase):
                                 data = eval(
                                     headle_re.str_data('${rely_key}', data,
                                                        eval(excel_data.get_cell_value(i, 5, sheet_number))))
-                    # 处理修改手机号不需要验证码逻辑
-                    elif str(data).find('${new_phone}') != -1:
-                        data = headle_re.str_data('${new_phone}', data, gd.get_new_phone())
-                        if str(data).find('${rely_key}') != -1:
-                            data = eval(
-                                headle_re.str_data('${rely_key}', data,
-                                                   eval(excel_data.get_cell_value(i, 5, sheet_number))))
                     # transaction_id随机数生成（固定sjk+时间戳）
                     elif str(data).find('${transaction_id}') != -1:
                         data = headle_re.str_data('${transaction_id}', data, 'SJK' + str(gd.get_Timestamp()))

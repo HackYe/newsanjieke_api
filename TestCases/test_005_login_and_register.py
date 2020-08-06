@@ -122,6 +122,9 @@ class TestRunMain(unittest.TestCase):
             # 处理data
             if data != None:
                 try:
+                    # 替换SQL逻辑
+                    if str(data).find('${sql}') != -1:
+                        data = eval(headle_re.str_data('${sql}', data, handle_mysql.fetch_one(mysql_query)))
                     # 处理替换手机逻辑
                     if str(data).find('${phone}') != -1:
                         data = eval(headle_re.str_data('${phone}', data, gd.get_phone()))
