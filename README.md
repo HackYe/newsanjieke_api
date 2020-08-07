@@ -10,9 +10,11 @@
 二、各个模块简介
 
     1、Base封装Request方法
+    
         base_request 操作接口，其中封装了get和post方法(如后期有需要可以增加请求方式)
     
     2、Case测试用例维护目录
+    
         sanjieke_auto.xlsx 维护测试用例
 
     3、Common封装的常用的方法
@@ -22,14 +24,17 @@
         HTMLTestRunner_cn 生成测试报告的文件
         
     4、Config配置文件存储目录
+    
         header.ini 存储header的配置文件
         mysql.in 存储数据库的配置文件
         server.in 存储测试环境的文件 (Online、pre、Beta)
 
     5、image图片存储目录
+    
         image.png 上传头像接口用到的图片
         
     6、Outputs测试报告输出目录
+    
         html 此文件夹存储测试报告(html的方式)
         
     7、TestCases测试用例存放目录
@@ -45,6 +50,7 @@
         test_007_change_password 更换密码的测试用例
        
     8、Tools
+    
         handle_excel 读取和写入excel的方法
         handle_init 读取配置文件的方法
         handle_mysql 读取mysql的方法
