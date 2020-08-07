@@ -28,5 +28,8 @@ test_case_path = os.path.join(project_path, 'TestCases')
 time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))
 report_html_path = os.path.join(project_path, 'Outputs', 'html', 'Report_{0}.html'.format(time))
 
+# 获取测试报告目录的路径
+report_path = os.path.join(project_path, 'Outputs', 'html')
+
 if __name__ == '__main__':
-    print(report_html_path)
+    print(report_path)

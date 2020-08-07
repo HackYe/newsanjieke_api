@@ -22,6 +22,7 @@
         dir_config 方法为定义路径方法，获取文件路径和其他参数的路径
         get_data 方法为获取替换变量的数据
         HTMLTestRunner_cn 生成测试报告的文件
+        Send_email 发送邮件的方法
         
     4、Config配置文件存储目录
     
@@ -40,6 +41,7 @@
     7、TestCases测试用例存放目录
     
         Run 使用unittest，调用defaultTestLoader方法，加载discover，用来查询某个文件夹下以test_开头的.py结尾的文件，用来执行所有的测试用例，并生成测试报告
+        Run_Email 在Run的基础上加入发送邮件的功能
         stencil 测试用例的模版
         test_001_universal_interface 通用接口的测试用例
         test_002_buy_self_study_course 购买自学课并学习的测试用例
