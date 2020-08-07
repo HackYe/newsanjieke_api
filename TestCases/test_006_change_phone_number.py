@@ -53,6 +53,8 @@ class TestRunMain(unittest.TestCase):
         global header, code, msg, data_list, res_data, url_list
         global data_value, url_value
         case_id = test_data[0]
+        # if case_id == 'SJK_010':
+        #     print('这是需要断点的地方')
         i = excel_data.get_rows_number(case_id)
         sleep = test_data[18]
         if sleep != None:
@@ -160,8 +162,8 @@ class TestRunMain(unittest.TestCase):
                                     headle_re.str_data('${rely_key}', data,
                                                        eval(excel_data.get_cell_value(i, 5, sheet_number))))
                     # 处理修改手机号不需要验证码逻辑
-                    elif str(data).find('${new_phone}') != -1:
-                        data = headle_re.str_data('${new_phone}', data, gd.get_new_phone())
+                    elif str(data).find('${new_phone_no_code}') != -1:
+                        data = headle_re.str_data('${new_phone_no_code}', data, gd.get_new_phone())
                         if str(data).find('${rely_key}') != -1:
                             data = eval(
                                 headle_re.str_data('${rely_key}', data,

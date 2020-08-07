@@ -53,8 +53,8 @@ class TestRunMain(unittest.TestCase):
         global header, code, msg, data_list, res_data, url_list
         global data_value, url_value
         case_id = test_data[0]
-        if case_id == 'SJK_013':
-            print('这是断点的位置')
+        # if case_id == 'SJK_013':
+        #     print('这是断点的位置')
         i = excel_data.get_rows_number(case_id)
         sleep = test_data[18]
         if sleep != None:
