@@ -1,6 +1,8 @@
 一、项目描述：
 
         newsanjieke_api 接口自动化测试框架
+        
+        该项目主要是针对已经通过测试接口进行回归，保证已经通过测试的接口不会因为升级或者迭代而出现问题
 引言
         
         部署环境时，首先执行requirements.txt，命令如下:
@@ -21,6 +23,7 @@
         
         dir_config 方法为定义路径方法，获取文件路径和其他参数的路径
         get_data 方法为获取替换变量的数据
+        html_read 读取html报告中的文本数据，用于发送邮件的正文
         HTMLTestRunner_cn 生成测试报告的文件
         Send_email 发送邮件的方法
         

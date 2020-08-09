@@ -10,6 +10,7 @@ import time
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
+from Common.html_read import one_click_reading
 
 username = 'yuanye@sanjieke.com'
 password = "4zJtsEaEYXxk7CGL"
@@ -27,7 +28,7 @@ def email(report):
     jpgpart = MIMEApplication(open(report, 'rb').read())
     jpgpart.add_header('Content-Disposition', 'attachment', filename='Sanjieke_Auto_Api.html')
     msg.attach(jpgpart)
-    msg.attach(MIMEText('这是三节课app接口的测试报告，请查收！'))
+    msg.attach(MIMEText('这是三节课app接口的测试报告，请查收！\n\n{0}\n\n详细情况请查看附件！'.format(one_click_reading(report))))
 
     # 发送邮件
     client = smtplib.SMTP()
@@ -35,7 +36,7 @@ def email(report):
     client.login(username, password)
     client.sendmail(sender, receivers, msg.as_string())
     client.quit()
-    print("邮件发送成功，请查看")
+    print("邮件发送成功，请查看！")
 
 
 if __name__ == '__main__':
