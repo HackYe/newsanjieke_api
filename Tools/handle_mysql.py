@@ -38,8 +38,10 @@ class HandleMysql:
 
 handle_mysql = HandleMysql()
 if __name__ == '__main__':
+    # res = handle_mysql.fetch_one(
+    #     "SELECT code FROM sjk_user.validation_code WHERE target = '+8613299203435' ORDER BY id DESC LIMIT 1")
     res = handle_mysql.fetch_one(
-        "SELECT code FROM sjk_user.validation_code WHERE target = '+8613299203435' ORDER BY id DESC LIMIT 1")
+        "select nickname from sjk_user.auth_identity i left join sjk_user.profile p on i.user_id = p.user_id where type = 'phone' and username = '+8613299203435'")
     # print(eval((res)['code']))
     # print(type(eval((res)['code'])))
     print(res)

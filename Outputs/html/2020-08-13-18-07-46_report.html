@@ -419,9 +419,9 @@ function hide_img(obj){
 </script>
 <div class='heading'>
 <h1>三节课接口测试报告</h1>
-<p class='attribute'><strong>开始时间:</strong> 2020-08-07 17:28:32</p>
-<p class='attribute'><strong>耗时:</strong> 0:00:15.625434</p>
-<p class='attribute'><strong>状态:</strong> <span class="tj passCase">Pass</span>:6 <span class="tj">通过率</span>:100.0%</p>
+<p class='attribute'><strong>开始时间:</strong> 2020-08-13 18:07:46</p>
+<p class='attribute'><strong>耗时:</strong> 0:00:27.597341</p>
+<p class='attribute'><strong>状态:</strong> <span class="tj passCase">Pass</span>:9 <span class="tj failCase">Failure</span>:4 <span class="tj">通过率</span>:69.2%</p>
 
 <p class='description'>三节课Pre接口测试报告</p>
 </div>
@@ -434,12 +434,12 @@ function hide_img(obj){
 </div>
 
 <div id='show_detail_line' style=" float: left;  width: 100%;">
-<a class="abstract detail_button" href='javascript:showCase(0,1)'>概要[100.00%]</a>
-<a class="passed  detail_button" href='javascript:showCase(1,1)'>通过[6]</a>
-<a class="failed  detail_button" href='javascript:showCase(2,1)'>失败[0]</a>
+<a class="abstract detail_button" href='javascript:showCase(0,1)'>概要[69.23%]</a>
+<a class="passed  detail_button" href='javascript:showCase(1,1)'>通过[9]</a>
+<a class="failed  detail_button" href='javascript:showCase(2,1)'>失败[4]</a>
 <a class="errored  detail_button" href='javascript:showCase(3,1)'>错误[0]</a>
 <a class="skiped  detail_button"  href='javascript:showCase(4,1)'>跳过[0]</a>
-<a class="all detail_button" href='javascript:showCase(5,1)'>所有[6]</a>
+<a class="all detail_button" href='javascript:showCase(5,1)'>所有[13]</a>
 </div>
 
 <table id='result_table'>
@@ -462,34 +462,42 @@ function hide_img(obj){
     <th>错误截图</th>
 </tr>
 
-<tr class='passClass'>
-    <td>test_004_redeem_coupons.TestRunMain</td>
-    <td>6</td>
-    <td>6</td>
+<tr class='failClass'>
+    <td>test_009_tester.TestRunMain</td>
+    <td>13</td>
+    <td>9</td>
+    <td>4</td>
     <td>0</td>
-    <td>0</td>
-    <td><a href="javascript:showClassDetail('c1.1',6)">详情</a></td>
+    <td><a href="javascript:showClassDetail('c1.1',13)">详情</a></td>
     <td>&nbsp;</td>
 </tr>
 
-<tr id='pt1.1.1' class='hiddenRow'>
-    <td ><div class='testcase'>test_run_case_1___SJK_001____发送登录验证码____yes___None__None__None__None____login_send_code____post______phone_____phone______None___yes____code___200_____code___200___msg____ok____data_____is_exist___False______PASS___None__None__None_</div></td>
+<tr id='ft1.1.1' class='none'>
+    <td ><div class='testcase'>test_run_case_01___SJK_001____发送登录验证码____yes___None__None__None__None____login_send_code____post______phone_____phone______None___yes____code___201_____code___200___msg____ok____data_____is_exist___False______PASS___None__None__None_</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
-    <span class='status passCase'>
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1.1')" >
-        通过</a></span>
+    <span class='status failCase'>
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.1.1')" >
+        失败</a></span>
 
-    <div id='div_pt1.1.1' class="popup_window">
+    <div id='div_ft1.1.1' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1.1').style.display = 'none' " >
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.1.1').style.display = 'none' " >
            [x]</a>
         </div>
         <pre>
         
-pt1.1.1: 正在测试的用例是发送登录验证码
-返回的数据是---------&gt; {'code': 200, 'msg': 'ok', 'data': {'is_exist': False}}
+ft1.1.1: 正在测试的用例是发送登录验证码
+返回的错误结果是: {'code': 200, 'msg': 'ok', 'data': {'is_exist': False}}
+Traceback (most recent call last):
+  File "/Users/yuanye/PycharmProjects/newsanjieke_api/venv/lib/python3.8/site-packages/ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "/Users/yuanye/PycharmProjects/newsanjieke_api/TestCases/test_009_tester.py", line 220, in test_run_case
+    raise e
+  File "/Users/yuanye/PycharmProjects/newsanjieke_api/TestCases/test_009_tester.py", line 215, in test_run_case
+    self.assertEqual(excepect_result, code)
+AssertionError: 201 != 200
 
 
         </pre>
@@ -500,24 +508,36 @@ pt1.1.1: 正在测试的用例是发送登录验证码
     <td>无截图</td>
 </tr>
 
-<tr id='pt1.1.2' class='hiddenRow'>
-    <td ><div class='testcase'>test_run_case_2___SJK_002____短信登录_验证码错误____yes___None__None__None__None____passpart_logincode____post______phone_____phone____code___1234_____None___yes____code___400_____code___400___msg____验证码是无效_____data__________PASS___None__None__None_</div></td>
+<tr id='ft1.1.2' class='none'>
+    <td ><div class='testcase'>test_run_case_02___SJK_002____短信登录_验证码错误____yes___None__None__None__None____passpart_logincode____post______phone_____phone____code___1234_____None___yes____msg____验证码是无效______code___400___msg____验证码是无效_____data__________PASS___None__None__None_</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
-    <span class='status passCase'>
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1.2')" >
-        通过</a></span>
+    <span class='status failCase'>
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.1.2')" >
+        失败</a></span>
 
-    <div id='div_pt1.1.2' class="popup_window">
+    <div id='div_ft1.1.2' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1.2').style.display = 'none' " >
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.1.2').style.display = 'none' " >
            [x]</a>
         </div>
         <pre>
         
-pt1.1.2: 正在测试的用例是短信登录-验证码错误
-返回的数据是---------&gt; {'code': 400, 'msg': '验证码是无效。', 'data': {}}
+ft1.1.2: 正在测试的用例是短信登录-验证码错误
+返回的错误结果是: {'code': 400, 'msg': '验证码是无效。', 'data': {}}
+Traceback (most recent call last):
+  File "/Users/yuanye/PycharmProjects/newsanjieke_api/venv/lib/python3.8/site-packages/ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "/Users/yuanye/PycharmProjects/newsanjieke_api/TestCases/test_009_tester.py", line 228, in test_run_case
+    raise e
+  File "/Users/yuanye/PycharmProjects/newsanjieke_api/TestCases/test_009_tester.py", line 223, in test_run_case
+    self.assertEqual(excepect_result, msg)
+AssertionError: '验证码是无效' != '验证码是无效。'
+- 验证码是无效
++ 验证码是无效。
+?       +
+
 
 
         </pre>
@@ -528,24 +548,32 @@ pt1.1.2: 正在测试的用例是短信登录-验证码错误
     <td>无截图</td>
 </tr>
 
-<tr id='pt1.1.3' class='hiddenRow'>
-    <td ><div class='testcase'>test_run_case_3___SJK_003____短信登录_验证码正确____yes___None__None__None__None____passpart_logincode____post______phone_____phone____code_____sql______None___yes____code___200_____code___200___data_____token____eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9_eyJhdWQiOiIxIiwianRpIjoiYmI1OGU2MWQ0MTE5NWM3MDg3YWNjMWI4ZDZlOTZiNGE5ZTU5YWQ1YThmNzU4YzA2MTU5ZDYyNDdhYmViNTM0YTE0OTIzODI1YTUwZDNiYzQiLCJpYXQiOjE1OTY3OTI0MTYsIm5iZiI6MTU5Njc5MjQxNiwiZXhwIjoxNTk2NzkyNDc2LCJzdWIiOiI2MDgwMDE1NjQiLCJpc3MiOiJzYW5qaWVrZS1wcmUiLCJzaWQiOiJiYjU4ZTYxZDQxMTk1YzcwODdhY2MxYjhkNmU5NmI0YTllNTlhZDVhOGY3NThjMDYxNTlkNjI0N2FiZWI1MzRhMTQ5MjM4MjVhNTBkM2JjNCIsInNjb3BlcyI6W119_cHrvGS2L0Dp0vLi5NKdMbjMhGW7H_u2KizS4KcQ9E9vNi1IUkgMjsmyw5qiML2eSS0jORi8HATo8IOe_ztEwmQ_____msg____ok______PASS___None___SELECT_code_FROM_sjk_user_validation_code_WHERE_target_____86__phone___ORDER_BY_id_DESC_LIMIT_1___None_</div></td>
+<tr id='ft1.1.3' class='none'>
+    <td ><div class='testcase'>test_run_case_03___SJK_003____短信登录_验证码正确____yes___None__None__None__None____passpart_logincode____post______phone_____phone____code_____sql______None___yes____json______code___200___data_____token1____这个地方是token的value_____msg____ok________code___200___data_____token____eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9_eyJhdWQiOiIxIiwianRpIjoiYmRkMzBhYWU4MWM4YTAwMjJmZWY5OTk5NTkwODZiMWQ3NTNiNGExMTg2MmVjNzNlYzc1Y2RlYjEzMmU0MzVmZmI3NDlmZTc3MmRmYWY4OWQiLCJpYXQiOjE1OTczMTI5NjcsIm5iZiI6MTU5NzMxMjk2NywiZXhwIjoxNTk3MzEzMDI3LCJzdWIiOiI2MDgwMDE2MDgiLCJpc3MiOiJzYW5qaWVrZS1wcmUiLCJzaWQiOiJiZGQzMGFhZTgxYzhhMDAyMmZlZjk5OTk1OTA4NmIxZDc1M2I0YTExODYyZWM3M2VjNzVjZGViMTMyZTQzNWZmYjc0OWZlNzcyZGZhZjg5ZCIsInNjb3BlcyI6W119_U9rMs31_HCHBiAMwmDeXDBCUPgL2eZFS2wgb_9avhp9TKiF1qbLckQ1ntpe9br7qEAc06KjQJh8GXokSK22H5g_____msg____ok______PASS___None___SELECT_code_FROM_sjk_user_validation_code_WHERE_target_____86__phone___ORDER_BY_id_DESC_LIMIT_1___None_</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
-    <span class='status passCase'>
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1.3')" >
-        通过</a></span>
+    <span class='status failCase'>
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.1.3')" >
+        失败</a></span>
 
-    <div id='div_pt1.1.3' class="popup_window">
+    <div id='div_ft1.1.3' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1.3').style.display = 'none' " >
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.1.3').style.display = 'none' " >
            [x]</a>
         </div>
         <pre>
         
-pt1.1.3: 正在测试的用例是短信登录-验证码正确
-返回的数据是---------&gt; {'code': 200, 'data': {'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNGNjZTlmODFkZDRlOGMzMTljMzhiNDdmYjI4ODlmNDBjMGRjNzhkOWNiYjUyN2FhNjA4OWRlNmNhZjkyMjAzZjFkMmQ5M2JmOTIyMmFlOTciLCJpYXQiOjE1OTY3OTI1MTgsIm5iZiI6MTU5Njc5MjUxOCwiZXhwIjoxNTk2NzkyNTc4LCJzdWIiOiI2MDgwMDE1NjUiLCJpc3MiOiJzYW5qaWVrZS1wcmUiLCJzaWQiOiI0Y2NlOWY4MWRkNGU4YzMxOWMzOGI0N2ZiMjg4OWY0MGMwZGM3OGQ5Y2JiNTI3YWE2MDg5ZGU2Y2FmOTIyMDNmMWQyZDkzYmY5MjIyYWU5NyIsInNjb3BlcyI6W119.NqUAdfeGpYGackwYoHIycL5GwngvtAJtKUeJ4yR_Qr2GXSXL6Jtoaqf-1MEccANvV8YJOwlRdj8_AjGQNNdi7Q'}, 'msg': 'ok'}
+ft1.1.3: 正在测试的用例是短信登录-验证码正确
+返回的错误结果是: {'code': 200, 'data': {'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZTAzN2IwZjhjMjZhZmI4OGY3Y2MyNWNhYmY4NGNhYTRkNWNjNjRkMWI4NjE4NGQxMTU1YzFmNzMwNjM4OGMwMTIxZTQ1NDExNjI5ZDY0NTUiLCJpYXQiOjE1OTczMTMyNzIsIm5iZiI6MTU5NzMxMzI3MiwiZXhwIjoxNTk3MzEzMzMyLCJzdWIiOiI2MDgwMDE2MDkiLCJpc3MiOiJzYW5qaWVrZS1wcmUiLCJzaWQiOiJlMDM3YjBmOGMyNmFmYjg4ZjdjYzI1Y2FiZjg0Y2FhNGQ1Y2M2NGQxYjg2MTg0ZDExNTVjMWY3MzA2Mzg4YzAxMjFlNDU0MTE2MjlkNjQ1NSIsInNjb3BlcyI6W119.gooTJNhRwizoe6oJUoetEEr8ZAOuIb_qcUYp4zj7wq4eutyGXsA1zkOwWa4ssbZHbhDURemvtAebjFqj2A5c1Q'}, 'msg': 'ok'}
+Traceback (most recent call last):
+  File "/Users/yuanye/PycharmProjects/newsanjieke_api/venv/lib/python3.8/site-packages/ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "/Users/yuanye/PycharmProjects/newsanjieke_api/TestCases/test_009_tester.py", line 237, in test_run_case
+    raise e
+  File "/Users/yuanye/PycharmProjects/newsanjieke_api/TestCases/test_009_tester.py", line 232, in test_run_case
+    self.assertTrue(json_res)
+AssertionError: False is not true
 
 
         </pre>
@@ -557,7 +585,7 @@ pt1.1.3: 正在测试的用例是短信登录-验证码正确
 </tr>
 
 <tr id='pt1.1.4' class='hiddenRow'>
-    <td ><div class='testcase'>test_run_case_4___SJK_004____获取优惠券列表____yes___None__None__None__None____paycenter_coupons____get___None__None___token____code___200_____code___200___data________msg____ok______PASS___None__None__None_</div></td>
+    <td ><div class='testcase'>test_run_case_04___SJK_004____获取个人中心信息____yes___None__None__None__None____usercenter_info____post___None__None___token____code___200_____code___200___data_____uid____608001608____name____sjk_621671247____sex____保密____birth________month________day________job________professional________work_year____0_1年____email________img____https___cdn_sanjieke_cn_upload_image_200511_5eb90363c6299_png____headline________real_name____sjk_621671247____phone____14530000436____is_temp___0___real_name_set_day____0____is_authenticator____0____is_interpret_authenticator____0____is_rss_authenticator____0____is_activate___False___update_info_____is_update___True___name________avatar_________activation_way____未激活____is_ios_guest___0____msg____OK______PASS___None__None__None_</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -572,8 +600,8 @@ pt1.1.3: 正在测试的用例是短信登录-验证码正确
         </div>
         <pre>
         
-pt1.1.4: 正在测试的用例是获取优惠券列表
-返回的数据是---------&gt; {'code': 200, 'data': [], 'msg': 'ok'}
+pt1.1.4: 正在测试的用例是获取个人中心信息
+返回的数据是---------&gt; {'code': 200, 'data': {'uid': '608001609', 'name': 'sjk_1829671363', 'sex': '保密', 'birth': '', 'month': '', 'day': '', 'job': '', 'professional': '', 'work_year': '0~1年', 'email': '', 'img': 'https://cdn.sanjieke.cn/upload/image/200511/5eb90363c6299.png', 'headline': '', 'real_name': 'sjk_1829671363', 'phone': '14530000437', 'is_temp': 0, 'real_name_set_day': '0', 'is_authenticator': '0', 'is_interpret_authenticator': '0', 'is_rss_authenticator': '0', 'is_activate': False, 'update_info': {'is_update': True, 'name': '', 'avatar': ''}, 'activation_way': '未激活', 'is_ios_guest': 0}, 'msg': 'OK'}
 
 
         </pre>
@@ -584,24 +612,36 @@ pt1.1.4: 正在测试的用例是获取优惠券列表
     <td>无截图</td>
 </tr>
 
-<tr id='pt1.1.5' class='hiddenRow'>
-    <td ><div class='testcase'>test_run_case_5___SJK_005____点击优惠码兑换_输入错误卡券____yes___None__None__None__None____paycenter_duicoupon____post______coupon_code___12345_____None___token____code___403_____code___403___data________msg____优惠码不可使用______PASS___None__None__None_</div></td>
+<tr id='ft1.1.5' class='none'>
+    <td ><div class='testcase'>test_run_case_05___SJK_005____更新用户信息____yes___None__None__None__None____usercenter_updateinfo____post_______params____json_dumps___work_year____1年___professional____CEO___birth____2020___day____01___month____07___real_name____三节课___job____测试___sex____男___name____sanjieke_test_______None___token____sql____sanjieke_test1______code___200___data_____uid____608001608____name____sanjieke_test____sex____男____birth____2020____month____07____day____01____job____测试____professional____CEO____work_year____0_1年____email________img____https___cdn_sanjieke_cn_upload_image_200511_5eb90363c6299_png____headline________real_name____三节课____real_name_set_day____180____is_temp___0___is_authenticator____0____is_interpret_authenticator____0____is_rss_authenticator____0____is_activate___False___update_info_____is_update___True___name____sanjieke_test____avatar_________activation_way____未激活____is_ios_guest___0____msg____OK______PASS___None___select_nickname_from_sjk_user_auth_identity_i_left_join_sjk_user_profile_p_on_i_user_id___p_user_id_where_type____phone__and_username______86__phone_____None_</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
-    <span class='status passCase'>
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1.5')" >
-        通过</a></span>
+    <span class='status failCase'>
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.1.5')" >
+        失败</a></span>
 
-    <div id='div_pt1.1.5' class="popup_window">
+    <div id='div_ft1.1.5' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1.5').style.display = 'none' " >
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.1.5').style.display = 'none' " >
            [x]</a>
         </div>
         <pre>
         
-pt1.1.5: 正在测试的用例是点击优惠码兑换-输入错误卡券
-返回的数据是---------&gt; {'code': 403, 'data': [], 'msg': '优惠码不可使用'}
+ft1.1.5: 正在测试的用例是更新用户信息
+返回的错误结果是: {'code': 200, 'data': {'uid': '608001609', 'name': 'sanjieke_test', 'sex': '男', 'birth': '2020', 'month': '07', 'day': '01', 'job': '测试', 'professional': 'CEO', 'work_year': '0~1年', 'email': '', 'img': 'https://cdn.sanjieke.cn/upload/image/200511/5eb90363c6299.png', 'headline': '', 'real_name': '三节课', 'real_name_set_day': '180', 'is_temp': 0, 'is_authenticator': '0', 'is_interpret_authenticator': '0', 'is_rss_authenticator': '0', 'is_activate': False, 'update_info': {'is_update': True, 'name': 'sanjieke_test', 'avatar': ''}, 'activation_way': '未激活', 'is_ios_guest': 0}, 'msg': 'OK'}
+Traceback (most recent call last):
+  File "/Users/yuanye/PycharmProjects/newsanjieke_api/venv/lib/python3.8/site-packages/ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "/Users/yuanye/PycharmProjects/newsanjieke_api/TestCases/test_009_tester.py", line 245, in test_run_case
+    raise e
+  File "/Users/yuanye/PycharmProjects/newsanjieke_api/TestCases/test_009_tester.py", line 240, in test_run_case
+    self.assertEqual(excepect_result, handle_mysql.fetch_one(mysql_query))
+AssertionError: 'sanjieke_test1' != 'sanjieke_test'
+- sanjieke_test1
+?              -
++ sanjieke_test
+
 
 
         </pre>
@@ -613,7 +653,7 @@ pt1.1.5: 正在测试的用例是点击优惠码兑换-输入错误卡券
 </tr>
 
 <tr id='pt1.1.6' class='hiddenRow'>
-    <td ><div class='testcase'>test_run_case_6___SJK_006____点击优惠码兑换_输入正确____yes___None__None__None__None____paycenter_duicoupon____post______coupon_code___autotest_____None___token____code___200_____code___200___data________msg____兑换成功______PASS___None__None__5_</div></td>
+    <td ><div class='testcase'>test_run_case_06___SJK_006____课程详情页____yes___None__None__None__None____course_detail_course_id_8309271____get___None__None___token____code___200_____code___200___data_____course_info_____course_id____8309271____course_type___1___course_price___3_5___original_price________course_title____培计测试1____course_logo____https___cdn_sanjieke_cn_upload_image_159538866023_png____detail_url____http___pre_www_sanjieke_cn_course_detail_yz_8000863_spu_sn_8309271____share_url____http___pre_www_sanjieke_cn_course_detail_sjk_8000863_spu_sn_8309271____has_selling_class___True____class_info______class_id____368382694____class_name____培养计划测试_于海洋_2_____class_time____10月31日_00_00开课____class_price___3_5___remain___199953___is_choose___1___type___1___sku_id____2812____redirect_url____sanjieke___sanjieke_cn_course_chapter__class_id_368382694______text_____sales_wechat_number____sanjieke003____sales_wechat_qrcode____https___asset_3jk_top_project_homepage_img_consultantCode_jpg____no_selling_class____抢光啦_____waiting_new_class____敬请期待_下一班期______msg____ok______PASS___None__None__None_</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -628,8 +668,204 @@ pt1.1.5: 正在测试的用例是点击优惠码兑换-输入错误卡券
         </div>
         <pre>
         
-pt1.1.6: 正在测试的用例是点击优惠码兑换-输入正确
-返回的数据是---------&gt; {'code': 200, 'data': {}, 'msg': '兑换成功'}
+pt1.1.6: 正在测试的用例是课程详情页
+返回的数据是---------&gt; {'code': 200, 'data': {'course_info': {'course_id': '8309271', 'course_type': 1, 'course_price': 3.5, 'original_price': '', 'course_title': '培计测试1', 'course_logo': 'https://cdn.sanjieke.cn/upload/image/159538866023.png', 'detail_url': 'http://pre.www.sanjieke.cn/course/detail/yz/8000863?spu_sn=8309271', 'share_url': 'http://pre.www.sanjieke.cn/course/detail/sjk/8000863?spu_sn=8309271', 'has_selling_class': True}, 'class_info': [{'class_id': '368382694', 'class_name': '培养计划测试-于海洋（2）', 'class_time': '10月31日 00:00开课', 'class_price': 3.5, 'remain': 199952, 'is_choose': 1, 'type': 1, 'sku_id': '2812', 'redirect_url': 'sanjieke://sanjieke.cn/course/chapter/?class_id=368382694'}], 'text': {'sales_wechat_number': 'sanjieke003', 'sales_wechat_qrcode': 'https://asset.3jk.top/project/homepage/img/consultantCode.jpg', 'no_selling_class': '抢光啦~', 'waiting_new_class': '敬请期待，下一班期'}}, 'msg': 'ok'}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td>无截图</td>
+</tr>
+
+<tr id='pt1.1.7' class='hiddenRow'>
+    <td ><div class='testcase'>test_run_case_07___SJK_007____立即报名_获取订单商品信息_训练营____yes____SJK_006____eval_data_value___data____class_info___0___sku_id_____None__None____order_checkout_info____get______sku_id_____rely_key____coupon_code______use_coupon___1_____None___token____code___200_____code___200___data_____type___3___has_available_coupon___False___allow_ssc_pay___True___ssc_remain___0___total_price___3_5___coupon_price___0___real_price___3_5___goods_list______id___8000863___name____培计测试1____price___3_5___cover____https___cdn_sanjieke_cn_upload_image_159538866023_png____type___2___attributes_____10月31日_00_00开课_______coupon_info_____code________reduce_amount___0_____msg____ok______PASS___None__None__None_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <span class='status passCase'>
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1.7')" >
+        通过</a></span>
+
+    <div id='div_pt1.1.7' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.1.7: 正在测试的用例是立即报名+获取订单商品信息-训练营
+返回的数据是---------&gt; {'code': 200, 'data': {'type': 3, 'has_available_coupon': False, 'allow_ssc_pay': True, 'ssc_remain': 0, 'total_price': 3.5, 'coupon_price': 0, 'real_price': 3.5, 'goods_list': [{'id': 8000863, 'name': '培计测试1', 'price': 3.5, 'cover': 'https://cdn.sanjieke.cn/upload/image/159538866023.png', 'type': 2, 'attributes': ['10月31日 00:00开课']}], 'coupon_info': {'code': '', 'reduce_amount': 0}}, 'msg': 'ok'}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td>无截图</td>
+</tr>
+
+<tr id='pt1.1.8' class='hiddenRow'>
+    <td ><div class='testcase'>test_run_case_08___SJK_008____创建订单_阿里支付_训练营_使用优惠券_____yes____SJK_006_SJK_007_SJK_007____eval_data_value___data____class_info___0___sku_id___eval_data_value___data____coupon_info____code___eval_data_value___data____goods_list___0___type_____None__None____order_confirm____post______pay_channel___ali___sku_id_____rely_keys____coupons_code_____rely_keys____type_____rely_keys____return_url___sanjieke___sanjieke_cn______None___token____code___200_____code___200___data_____order_info___None___order_sn____20200813180300100dahnoq____pay_done___False___pay_url____alipay___alipayclient___7B_22fromAppUrlScheme_22_3A_22sanjieke_3A_5C_2F_5C_2Fsanjieke_cn_5C_2F_22_2C_22requestType_22_3A_22SafePay_22_2C_22dataString_22_3A_22app_id_3D2016082100305800_26format_3DJSON_26charset_3Dutf_8_26sign_type_3DRSA2_26version_3D1_0_26notify_url_3Dhttp_253A_252F_252Fcashier_pre_sanjieke_cn_252Fapi_252Fnotify_252Falipay_26timestamp_3D2020_08_13_2B18_253A03_253A00_26biz_content_3D_257B_2522out_trade_no_2522_253A_252220200813180300002kz8ksj_2522_252C_2522total_amount_2522_253A3_5_252C_2522subject_2522_253A_2522_255Cu57f9_255Cu8ba1_255Cu6d4b_255Cu8bd51_2B_255Cu57f9_255Cu517b_255Cu8ba1_255Cu5212_255Cu6d4b_255Cu8bd5__255Cu4e8e_255Cu6d77_255Cu6d0b_255Cuff082_255Cuff09_2522_252C_2522product_code_2522_253A_2522QUICK_MSECURITY_PAY_2522_252C_2522timeout_express_2522_253A_252216m_2522_257D_26method_3Dalipay_trade_app_pay_26sign_3Dh4emi18D3tuLs4zqtoe4zrf8WeWRD_252FI2HDy5uwkw5Lmk_252B2Vunbn0XE1UidYxSZKUJcHgQqA4Pxf6I3xcDQDH5x8hF0dYGaFk1WQ04mRopuHAhwraWJ9nHdqSvUMNh4I3b6_252F_252FWe5faTmWIWVf3NSNukm0hZchyXKbGALx5u9eVB3oEGHva1F_252BgMsSJr7HsS2UtK_252FSDkbqk4i8frPskiqlZ1Wp3ld2NnLRGcoJ32Bln9rMXJYFJCU_252B7ikKg3azhmF5v8dt5blnu5XWx9vQOCzL0hfbTjD7uTduwKc7LZSy5CqXXGQaLQZy1DB7HzDak8kzcyf0ZPz62636HEp9ZFY7Mg_253D_253D_22_7D_____msg____ok______PASS___None__None__None_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <span class='status passCase'>
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1.8')" >
+        通过</a></span>
+
+    <div id='div_pt1.1.8' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1.8').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.1.8: 正在测试的用例是创建订单+阿里支付-训练营(使用优惠券)
+返回的数据是---------&gt; {'code': 200, 'data': {'order_info': None, 'order_sn': '20200813180803100jal7ms', 'pay_done': False, 'pay_url': 'alipay://alipayclient/?%7B%22fromAppUrlScheme%22%3A%22sanjieke%3A%5C%2F%5C%2Fsanjieke.cn%5C%2F%22%2C%22requestType%22%3A%22SafePay%22%2C%22dataString%22%3A%22app_id%3D2016082100305800%26format%3DJSON%26charset%3Dutf-8%26sign_type%3DRSA2%26version%3D1.0%26notify_url%3Dhttp%253A%252F%252Fcashier.pre.sanjieke.cn%252Fapi%252Fnotify%252Falipay%26timestamp%3D2020-08-13%2B18%253A08%253A04%26biz_content%3D%257B%2522out_trade_no%2522%253A%252220200813180804002onip3i%2522%252C%2522total_amount%2522%253A3.5%252C%2522subject%2522%253A%2522%255Cu57f9%255Cu8ba1%255Cu6d4b%255Cu8bd51%2B%255Cu57f9%255Cu517b%255Cu8ba1%255Cu5212%255Cu6d4b%255Cu8bd5-%255Cu4e8e%255Cu6d77%255Cu6d0b%255Cuff082%255Cuff09%2522%252C%2522product_code%2522%253A%2522QUICK_MSECURITY_PAY%2522%252C%2522timeout_express%2522%253A%252216m%2522%257D%26method%3Dalipay.trade.app.pay%26sign%3DQVzDuW4Nodgn4nTQYVDAHQR4L2MzynOehehGTkz7Qr7qR4GUB1oVPWH%252BBaFtvk%252BDc682cAqKIAKEvglIhptE4PsgqnTtgbjejkcgldWzZPo27wyPYEAjyTzSXxX%252BifxJ25JMwi5mIBzBnwpchQAb2wwHSdT5hGl4XaKU9TBwGjwMKEs4IXaeyg6B6pTvCE7Pils%252B%252BBUtmAoLXAdR1kg2rsudkXeeVo0MHJHFHVmrUelFVXH1aEyuhzIBVrmlNESPtfVzQeAyqUlh4rLATQdydlxKBCxnmChguhe2x3mRDi%252FMqSxJwIts4cIFBssCebFfD3gFge5bPv8s2dVqZq4mUw%253D%253D%22%7D'}, 'msg': 'ok'}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td>无截图</td>
+</tr>
+
+<tr id='pt1.1.9' class='hiddenRow'>
+    <td ><div class='testcase'>test_run_case_09___SJK_009____自动化支付回调_训练营____yes____SJK_007_SJK_008____eval_data_value___data____real_price___eval_data_value___data____order_sn_____None__None___http___cashier_i_pre_3jk_ink_36008_api_notify_automation____post______transaction_id_____transaction_id____total_amount_____rely_keys____order_sn_____rely_keys______None___token____code___200_____code___200___data________msg____ok______PASS___None__None__None_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <span class='status passCase'>
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1.9')" >
+        通过</a></span>
+
+    <div id='div_pt1.1.9' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1.9').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.1.9: 正在测试的用例是自动化支付回调-训练营
+返回的数据是---------&gt; {'code': 200, 'data': [], 'msg': 'ok'}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td>无截图</td>
+</tr>
+
+<tr id='pt1.1.10' class='hiddenRow'>
+    <td ><div class='testcase'>test_run_case_10___SJK_010____检查订单_自学课____yes____SJK_008____eval_data_value___data____order_sn_____None__None____order_check_____get______order_sn_____rely_key______None___token____code___200_____code___200___data_____order_status____3____redirect_url____sanjieke___sanjieke_cn_course_chapter__class_id_368382694____is_booking_success___False___live_status___1___type___1____msg____ok______PASS___None__None__None_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <span class='status passCase'>
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1.10')" >
+        通过</a></span>
+
+    <div id='div_pt1.1.10' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1.10').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.1.10: 正在测试的用例是检查订单-自学课
+返回的数据是---------&gt; {'code': 200, 'data': {'order_status': '3', 'redirect_url': 'sanjieke://sanjieke.cn/course/chapter/?class_id=368382694', 'is_booking_success': False, 'live_status': 1, 'type': 1}, 'msg': 'ok'}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td>无截图</td>
+</tr>
+
+<tr id='pt1.1.11' class='hiddenRow'>
+    <td ><div class='testcase'>test_run_case_11___SJK_011____订单详情_自学课____yes____SJK_008____eval_data_value___data____order_sn_____None__None____order_detail____get______order_sn_____rely_key______None___token____code___200_____code___200___data_____order_sn____20200813180300100dahnoq____order_status___7___order_time____2020_08_13_18_03_00____order_price___3_5___order_type___2___goods_list______id____8309271____product_id___8000863___price___3_5___name____培养计划测试_于海洋_2_____cover____https___cdn_sanjieke_cn_upload_image_159538866023_png____type___2___attributes__________coupons_price___0___real_price___3_5___price_type____RMB____remain___893___is_selling___True____msg____ok______PASS___None__None__None_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <span class='status passCase'>
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1.11')" >
+        通过</a></span>
+
+    <div id='div_pt1.1.11' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1.11').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.1.11: 正在测试的用例是订单详情-自学课
+返回的数据是---------&gt; {'code': 200, 'data': {'order_sn': '20200813180803100jal7ms', 'order_status': 7, 'order_time': '2020-08-13 18:08:03', 'order_price': 3.5, 'order_type': 2, 'goods_list': [{'id': '8309271', 'product_id': 8000863, 'price': 3.5, 'name': '培养计划测试-于海洋（2）', 'cover': 'https://cdn.sanjieke.cn/upload/image/159538866023.png', 'type': 2, 'attributes': []}], 'coupons_price': 0, 'real_price': 3.5, 'price_type': 'RMB', 'remain': 893, 'is_selling': True}, 'msg': 'ok'}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td>无截图</td>
+</tr>
+
+<tr id='pt1.1.12' class='hiddenRow'>
+    <td ><div class='testcase'>test_run_case_12___SJK_012____已购学习页____yes___None__None__None__None____course_list_new____get___None__None___token____code___200_____code___200___data________msg____ok______PASS___None__None__None_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <span class='status passCase'>
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1.12')" >
+        通过</a></span>
+
+    <div id='div_pt1.1.12' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1.12').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.1.12: 正在测试的用例是已购学习页
+返回的数据是---------&gt; {'code': 200, 'data': [{'class_id': '368382694', 'class_name': '培养计划测试-于海洋（2）', 'is_study_plan': '0', 'last_study_time': 0, 'class_time_name': '2021年08月31日结课', 'course_content_num': 5, 'course_content_finished': 0, 'question_num': 0, 'question_finished': 0, 'stage_name': '', 'study_is_process': '0', 'news': ['已经学习了 0 天', '完成 0 个作业']}], 'msg': 'ok'}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td>无截图</td>
+</tr>
+
+<tr id='pt1.1.13' class='hiddenRow'>
+    <td ><div class='testcase'>test_run_case_13___SJK_013____获取章节目录_训练营____yes___None__None___SJK_012____eval_url_value___data___0___class_id_______study_course___rely_key__menulist____get___None__None___token____code___200_____code___400___data________msg____The_class_id_must_be_an_integer_______FAIL___None__None__None_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <span class='status passCase'>
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1.13')" >
+        通过</a></span>
+
+    <div id='div_pt1.1.13' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1.13').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.1.13: 正在测试的用例是获取章节目录-训练营
+返回的数据是---------&gt; {'code': 200, 'data': [{'chapter_id': 8002201, 'chapter_name': '第一章', 'class_id': '368382694', 'video_id': ['368381968'], 'video_size': 41016998, 'locked': 0, 'class_info': {'use_coco': '1', 'course_id': '8309271', 'course_name': '培养计划测试-于海洋', 'class_name': '培养计划测试-于海洋（2）', 'sku_name': '临时课和其它', 'college_name': '新课程'}, 'childs': [{'section_id': 8002202, 'section_name': '第一节', 'section_type': 2, 'video_time': '', 'last_study': 1, 'finished': 0, 'locked': 0, 'url': 'http://api.pre.sanjieke.cn/study/api/webview/token?redirect_url=http%3A%2F%2Fclass.pre.sanjieke.cn%2Fcourse%2Fview%2Fcid%2F368382694%3Fnode_id%3D8002202%26page%3D1%26platform%3Dapp', 'video_info': [], 'coco_content_url': '', 'homework_help': 'http://api.pre.sanjieke.cn/study/api/webview/token?redirect_url=http%3A%2F%2Fclass.pre.sanjieke.cn%2Fhomework%2FhomeworkHelp%3Fquestion_id%3D368381969%26user_id%3D608001609%26class_id%3D368382694%26section_id%3D8002202', 'homework_afflatus': '', 'homework_url': 'http://api.pre.sanjieke.cn/study/api/webview/token?redirect_url=http%3A%2F%2Fclass.pre.sanjieke.cn%2Fhomework%2FappHomeworkShow%3Fquestion_id%3D368381969%26user_id%3D608001609%26class_id%3D368382694%26section_id%3D8002202', 'homework_id': '368381969'}, {'section_id': 368382699, 'section_name': '第二节', 'section_type': 2, 'video_time': '9分33秒', 'last_study': 0, 'finished': 0, 'locked': 0, 'url': 'http://api.pre.sanjieke.cn/study/api/webview/token?redirect_url=http%3A%2F%2Fclass.pre.sanjieke.cn%2Fcourse%2Fview%2Fcid%2F368382694%3Fnode_id%3D368382699%26page%3D1%26platform%3Dapp', 'video_info': [{'video_id': '368381968', 'video_name': ' 测试视频观看数据01', 'class_id': '368382694', 'class_name': '培养计划测试-于海洋（2）', 'chapter_id': 8002201, 'chapter_name': '第一章', 'section_id': 368382699, 'section_name': '第二节', 'video_size': 41016998}], 'coco_content_url': 'http://api.pre.sanjieke.cn/study/api/webview/token?redirect_url=http%3A%2F%2Fclass.pre.sanjieke.cn%2Fclassroom%2Fapp%2Fwebview%3Fclass_id%3D368382694%26card_id%3D%26section_id%3D368382699', 'homework_help': '', 'homework_afflatus': '', 'homework_url': '', 'homework_id': ''}, {'section_id': 368382701, 'section_name': '第三节', 'section_type': 1, 'video_time': '', 'last_study': 0, 'finished': 0, 'locked': 0, 'url': 'http://api.pre.sanjieke.cn/study/api/webview/token?redirect_url=http%3A%2F%2Fclass.pre.sanjieke.cn%2Fcourse%2Fview%2Fcid%2F368382694%3Fnode_id%3D368382701%26page%3D1%26platform%3Dapp', 'video_info': [], 'coco_content_url': 'http://api.pre.sanjieke.cn/study/api/webview/token?redirect_url=http%3A%2F%2Fclass.pre.sanjieke.cn%2Fclassroom%2Fapp%2Fwebview%3Fclass_id%3D368382694%26card_id%3D%26section_id%3D368382701', 'homework_help': '', 'homework_afflatus': '', 'homework_url': '', 'homework_id': ''}]}, {'chapter_id': 368382702, 'chapter_name': '第二章', 'class_id': '368382694', 'video_id': ['368377225'], 'video_size': 13005920, 'locked': 0, 'class_info': {'use_coco': '1', 'course_id': '8309271', 'course_name': '培养计划测试-于海洋', 'class_name': '培养计划测试-于海洋（2）', 'sku_name': '临时课和其它', 'college_name': '新课程'}, 'childs': [{'section_id': 368382703, 'section_name': '第一节课', 'section_type': 1, 'video_time': '', 'last_study': 0, 'finished': 0, 'locked': 0, 'url': 'http://api.pre.sanjieke.cn/study/api/webview/token?redirect_url=http%3A%2F%2Fclass.pre.sanjieke.cn%2Fcourse%2Fview%2Fcid%2F368382694%3Fnode_id%3D368382703%26page%3D1%26platform%3Dapp', 'video_info': [], 'coco_content_url': 'http://api.pre.sanjieke.cn/study/api/webview/token?redirect_url=http%3A%2F%2Fclass.pre.sanjieke.cn%2Fclassroom%2Fapp%2Fwebview%3Fclass_id%3D368382694%26card_id%3D%26section_id%3D368382703', 'homework_help': '', 'homework_afflatus': '', 'homework_url': '', 'homework_id': ''}, {'section_id': 368382717, 'section_name': '第二节课程', 'section_type': 2, 'video_time': '4分3秒', 'last_study': 0, 'finished': 0, 'locked': 0, 'url': 'http://api.pre.sanjieke.cn/study/api/webview/token?redirect_url=http%3A%2F%2Fclass.pre.sanjieke.cn%2Fcourse%2Fview%2Fcid%2F368382694%3Fnode_id%3D368382717%26page%3D1%26platform%3Dapp', 'video_info': [{'video_id': '368377225', 'video_name': '教学工作台---选修视频9', 'class_id': '368382694', 'class_name': '培养计划测试-于海洋（2）', 'chapter_id': 368382702, 'chapter_name': '第二章', 'section_id': 368382717, 'section_name': '第二节课程', 'video_size': 13005920}], 'coco_content_url': 'http://api.pre.sanjieke.cn/study/api/webview/token?redirect_url=http%3A%2F%2Fclass.pre.sanjieke.cn%2Fclassroom%2Fapp%2Fwebview%3Fclass_id%3D368382694%26card_id%3D%26section_id%3D368382717', 'homework_help': '', 'homework_afflatus': '', 'homework_url': '', 'homework_id': ''}]}], 'msg': 'OK'}
 
 
         </pre>
@@ -642,9 +878,9 @@ pt1.1.6: 正在测试的用例是点击优惠码兑换-输入正确
 
 <tr id='total_row'>
     <th>统计</th>
-    <th>6</th>
-    <th>6</th>
-    <th>0</th>
+    <th>13</th>
+    <th>9</th>
+    <th>4</th>
     <th>0</th>
     <th>&nbsp;</th>
     <th>&nbsp;</th>
@@ -652,7 +888,7 @@ pt1.1.6: 正在测试的用例是点击优惠码兑换-输入正确
 </table>
 <script>
     showCase(0,1);
-    drawCircle('circle1',6, 0, 0,  0);
+    drawCircle('circle1',9, 4, 0,  0);
 </script>
 
 <div id='ending'>&nbsp;</div>

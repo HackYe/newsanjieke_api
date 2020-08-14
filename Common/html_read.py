@@ -62,11 +62,11 @@ def one_click_reading(file):
     success = read_success(file)
     fail = read_fail(file)
     error = read_error(file)
-    jumpover = read_jumpover(file)
     all = read_all(file)
-    res =  summary, success, fail, error, jumpover, all
+    res = summary, success, fail, error, all
     result = str(res).replace('\'', '')
     return result
+
 
 if __name__ == '__main__':
     data = '/Users/yuanye/PycharmProjects/newsanjieke_api/Outputs/html/Report_2020-08-07-17-16-51.html'

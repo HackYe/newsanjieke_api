@@ -34,7 +34,7 @@ def run_02():
     discover = unittest.defaultTestLoader.discover(test_case_path, pattern='test_*.py',
                                                    top_level_dir=None)
     now = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))
-    reportName = now + '_repot.html'
+    reportName = now + '_report.html'
     report = os.path.join(report_path, reportName)
     runner = html_new(title="三节课接口测试报告",
                       description='三节课' + str(gd.get_env()) + '接口测试报告',
